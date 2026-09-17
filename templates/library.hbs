@@ -1,0 +1,141 @@
+<form class="describe-library" autocomplete="off">
+  <header class="describe-library__header">
+    <div>
+      <h2>Описания</h2>
+      <p>{{count}} карточек</p>
+    </div>
+    {{#if isGM}}
+      <button type="button" data-action="new-card">
+        <i class="fas fa-plus"></i>
+        <span>Новая</span>
+      </button>
+    {{/if}}
+  </header>
+
+  {{#if showCategories}}
+    <section class="describe-categories" aria-label="Категории описаний">
+      {{#each categoryTiles}}
+        <button type="button" class="describe-category-tile {{#if this.active}}is-active{{/if}}" data-action="select-category" data-category="{{this.name}}">
+          <i class="{{this.icon}}"></i>
+          <strong>{{this.name}}</strong>
+          <span>{{this.count}}</span>
+        </button>
+      {{/each}}
+    </section>
+  {{else}}
+    <section class="describe-library__filters">
+      <button type="button" class="describe-back" data-action="show-categories" title="Категории">
+        <i class="fas fa-table-cells"></i>
+      </button>
+      <label>
+        <i class="fas fa-search"></i>
+        <input type="search" name="query" value="{{query}}" placeholder="Поиск по названию, тексту или тегам">
+      </label>
+      <label class="describe-favorites-filter">
+        <input type="checkbox" name="favoritesOnly" {{#if favoritesOnly}}checked{{/if}}>
+        <span>Избранные</span>
+      </label>
+      <select name="category">
+        {{#each categories}}
+          <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+        {{/each}}
+      </select>
+    </section>
+
+    <section class="describe-library__body">
+      <aside class="describe-folder-list">
+        <header>
+          <strong>{{folderTitle}}</strong>
+          {{#if hasSelectedCategory}}
+          {{#if isGM}}
+            <button type="button" data-action="new-folder" title="Добавить папку">
+              <i class="fas fa-folder-plus"></i>
+            </button>
+          {{/if}}
+          {{/if}}
+        </header>
+        {{#each folders}}
+          <article class="describe-folder-row {{#if this.selected}}is-selected{{/if}}" data-action="select-folder" data-folder-id="{{this.id}}">
+            <button type="button" class="describe-folder-row__main">
+              <i class="fas fa-folder"></i>
+              <span>{{this.name}}</span>
+              <em>{{this.count}}</em>
+            </button>
+            {{#if ../isGM}}
+              <button type="button" data-action="edit-folder" data-folder-id="{{this.id}}" title="Переименовать">
+                <i class="fas fa-pen"></i>
+              </button>
+              <button type="button" data-action="delete-folder" data-folder-id="{{this.id}}" title="Удалить">
+                <i class="fas fa-trash"></i>
+              </button>
+            {{/if}}
+          </article>
+        {{else}}
+          <p class="describe-empty">Папок пока нет.</p>
+        {{/each}}
+      </aside>
+
+      <aside class="describe-library__list">
+        {{#if hasCategory}}
+          <header class="describe-results-summary">
+            <span>{{resultCount}} найдено</span>
+            {{#if isLimited}}
+              <em>показаны первые {{resultLimit}}</em>
+            {{/if}}
+          </header>
+          {{#each cards}}
+            <article class="describe-card-row {{#if this.selected}}is-selected{{/if}}" data-card-id="{{this.id}}">
+              <img src="{{this.imageUrl}}" alt="">
+              <div>
+                <h3>{{this.title}}</h3>
+                <p>{{this.category}}</p>
+              </div>
+              <button type="button" class="describe-favorite {{#if this.favorite}}is-active{{/if}}" data-action="toggle-favorite" data-card-id="{{this.id}}" title="Избранное">
+                <i class="{{#if this.favorite}}fas{{else}}far{{/if}} fa-star"></i>
+              </button>
+            </article>
+          {{else}}
+            <p class="describe-empty">В этой папке ничего нет.</p>
+          {{/each}}
+        {{else}}
+          <p class="describe-empty">Выберите категорию.</p>
+        {{/if}}
+      </aside>
+
+      <article class="describe-library__preview">
+        {{#if selectedCard}}
+          <div class="describe-preview-art" style="background-image: url('{{selectedCard.imageUrl}}')"></div>
+          <div class="describe-preview-copy">
+            <span>{{selectedCard.category}}</span>
+            <h1>{{selectedCard.title}}</h1>
+            <p>{{selectedCard.description}}</p>
+            <menu>
+              <button type="button" class="describe-favorite-action {{#if selectedCard.favorite}}is-active{{/if}}" data-action="toggle-favorite" data-card-id="{{selectedCard.id}}">
+                <i class="{{#if selectedCard.favorite}}fas{{else}}far{{/if}} fa-star"></i>
+                <span>{{#if selectedCard.favorite}}В избранном{{else}}В избранное{{/if}}</span>
+              </button>
+              <button type="button" data-action="open-card" data-card-id="{{selectedCard.id}}">
+                <i class="fas fa-book-open"></i>
+                <span>Открыть</span>
+              </button>
+              {{#if canShow}}
+                <button type="button" data-action="show-card" data-card-id="{{selectedCard.id}}">
+                  <i class="fas fa-eye"></i>
+                  <span>Показать игрокам</span>
+                </button>
+              {{/if}}
+              {{#if isGM}}
+                <button type="button" data-action="edit-card" data-card-id="{{selectedCard.id}}">
+                  <i class="fas fa-pen"></i>
+                  <span>Редактировать</span>
+                </button>
+              {{/if}}
+            </menu>
+          </div>
+        {{else}}
+          <p class="describe-empty">Выберите карточку слева.</p>
+        {{/if}}
+      </article>
+    </section>
+  {{/if}}
+</form>

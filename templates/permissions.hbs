@@ -1,0 +1,28 @@
+<form class="describe-permissions" autocomplete="off">
+  <header>
+    <h2>Права доступа</h2>
+  </header>
+
+  <section class="describe-permissions__grid">
+    <strong>Роль</strong>
+    <strong>Открывать и смотреть</strong>
+    <strong>Показывать игрокам</strong>
+
+    {{#each roles}}
+      <span>{{this.label}}</span>
+      <label>
+        <input type="checkbox" name="roles.{{this.role}}.canOpen" {{#if this.canOpen}}checked{{/if}} {{#if this.isGM}}disabled{{/if}}>
+      </label>
+      <label>
+        <input type="checkbox" name="roles.{{this.role}}.canShow" {{#if this.canShow}}checked{{/if}} {{#if this.isGM}}disabled{{/if}}>
+      </label>
+    {{/each}}
+  </section>
+
+  <footer>
+    <button type="submit">
+      <i class="fas fa-save"></i>
+      <span>Сохранить</span>
+    </button>
+  </footer>
+</form>

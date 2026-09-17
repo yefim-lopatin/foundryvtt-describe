@@ -1,0 +1,82 @@
+<form class="describe-editor" autocomplete="off">
+  <label>
+    <span>Название</span>
+    <input type="text" name="title" value="{{card.title}}" required>
+  </label>
+
+  <label>
+    <span>Категория</span>
+    <select name="category" required>
+      {{#each categories}}
+        <option value="{{this.name}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
+      {{/each}}
+    </select>
+  </label>
+
+  <label>
+    <span>Папка</span>
+    <select name="folderId" required>
+      {{#each folders}}
+        <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
+      {{/each}}
+    </select>
+  </label>
+
+  <label>
+    <span>Теги через запятую</span>
+    <input type="text" name="tags" value="{{tags}}">
+  </label>
+
+  <section class="describe-editor__background">
+    <div class="describe-editor__preview" style="background-image: url('{{card.imageUrl}}')"></div>
+    <div class="describe-editor__background-fields">
+      <label>
+        <span>Базовый фон категории</span>
+        <select name="backgroundChoice">
+          {{#each backgroundOptions}}
+            <option value="{{this.path}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+          {{/each}}
+        </select>
+      </label>
+
+      <label>
+        <span>Выбранный фон</span>
+        <div class="describe-editor__path">
+          <input type="text" name="image" value="{{card.image}}" readonly>
+          <button type="button" data-action="browse-background" title="Выбрать файл">
+            <i class="fas fa-folder-open"></i>
+          </button>
+        </div>
+      </label>
+
+      <label>
+        <span>Загрузить свой фон</span>
+        <div class="describe-editor__upload">
+          <input type="file" name="upload" accept="image/*">
+          <button type="button" data-action="upload-background">
+            <i class="fas fa-upload"></i>
+            <span>Загрузить</span>
+          </button>
+        </div>
+      </label>
+    </div>
+  </section>
+
+  <label>
+    <span>Описание</span>
+    <textarea name="description" rows="9" required>{{card.description}}</textarea>
+  </label>
+
+  <footer>
+    {{#if canDelete}}
+      <button type="button" data-action="delete-card">
+        <i class="fas fa-trash"></i>
+        <span>Удалить</span>
+      </button>
+    {{/if}}
+    <button type="submit">
+      <i class="fas fa-save"></i>
+      <span>Сохранить</span>
+    </button>
+  </footer>
+</form>
