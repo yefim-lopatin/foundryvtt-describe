@@ -13,8 +13,8 @@
 
 ## Совместимость
 
-- Foundry VTT 14.361–14.368;
-- Pathfinder Second Edition 8.5.1.
+- Foundry VTT 14.361–14.369;
+- Pathfinder Second Edition 8.6.1.
 
 ## Установка
 

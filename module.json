@@ -3,7 +3,7 @@
   "id": "describe",
   "title": "Describe для PF2e",
   "description": "Русская библиотека атмосферных описаний для Pathfinder Second Edition: поиск, избранное, редактирование и показ карточек игрокам.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "authors": [
     {
       "name": "yefim-lopatin",
@@ -12,7 +12,7 @@
   ],
   "compatibility": {
     "minimum": "14.361",
-    "verified": "14.368",
+    "verified": "14.369",
     "maximum": "14"
   },
   "relationships": {
@@ -22,7 +22,7 @@
         "type": "system",
         "compatibility": {
           "minimum": "8.5.1",
-          "verified": "8.5.1"
+          "verified": "8.6.1"
         }
       }
     ]
@@ -44,5 +44,5 @@
   "url": "https://github.com/yefim-lopatin/foundryvtt-describe",
   "bugs": "https://github.com/yefim-lopatin/foundryvtt-describe/issues",
   "manifest": "https://github.com/yefim-lopatin/foundryvtt-describe/releases/latest/download/module.json",
-  "download": "https://github.com/yefim-lopatin/foundryvtt-describe/releases/download/v0.1.0/describe.zip"
+  "download": "https://github.com/yefim-lopatin/foundryvtt-describe/releases/download/v0.1.1/describe.zip"
 }
